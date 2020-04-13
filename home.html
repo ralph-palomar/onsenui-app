@@ -1,0 +1,59 @@
+<ons-page id="home">
+	<ons-splitter>
+	  <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+		<ons-page>
+		  <ons-list>
+			<ons-list-item>
+			  <b>Name goes here ...</b>
+			</ons-list-item>
+			<ons-list-item onclick="fn.load('home_template.html')" tappable>
+			  Home
+			</ons-list-item>
+			<ons-list-item onclick="fn.load('users.html')" tappable>
+			  Users
+			</ons-list-item>
+			<ons-list-item onclick="logout()" tappable>
+			  Logout
+			</ons-list-item>
+		  </ons-list>
+		</ons-page>
+	  </ons-splitter-side>
+	  <ons-splitter-content id="content" page="home_template.html"></ons-splitter-content>
+	</ons-splitter>
+
+	<template id="home_template.html">
+	  <ons-page>
+		<ons-toolbar>
+		  <div class="left">
+			<ons-toolbar-button onclick="fn.open()">
+			  <ons-icon icon="md-menu"></ons-icon>
+			</ons-toolbar-button>
+		  </div>
+		  <div class="center">
+			Main
+		  </div>
+		</ons-toolbar>
+		<div id="home_pb" hidden><ons-progress-bar indeterminate></ons-progress-bar></div>
+		<p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+		  Swipe right to open the menu!
+		</p>
+	  </ons-page>
+	</template>
+
+	<template id="users.html">
+	  <ons-page>
+		<ons-toolbar>
+		  <div class="left">
+			<ons-toolbar-button onclick="fn.open()">
+			  <ons-icon icon="md-menu"></ons-icon>
+			</ons-toolbar-button>
+		  </div>
+		  <div class="center">
+			Users
+		  </div>
+		</ons-toolbar>
+		<div id="users_pb" hidden><ons-progress-bar indeterminate></ons-progress-bar></div>
+	  </ons-page>
+	</template>
+
+ </ons-page>
