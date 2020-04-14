@@ -1,11 +1,11 @@
 function login() {
-  var email = document.querySelector('#index_email').value;
-  var password = document.querySelector('#index_password').value;
+  const email = document.querySelector('#index_email').value;
+  const password = document.querySelector('#index_password').value;
 
   if (!email || !password) {
 	ons.notification.toast('Please enter username/password', { timeout: 2000 });
   } else {
-	  var config = {
+	  const config = {
 		"url": "http://localhost:5000/user-management/api/v1/users",
 		"method": "GET",
 		"timeout": 60000,
@@ -15,25 +15,25 @@ function login() {
 		}
 	  };
 	  callApi(config, (data) => {
-		home();
+		  home();
 	  }, 'login');
   }
 }
 
 function register() {
-  var navigator = document.querySelector('#navigator');
+  const navigator = document.querySelector('#navigator');
   navigator.pushPage('register.html')
 }
 
 function createAccount() {
-  var email = document.querySelector('#register_email').value;
-  var firstname = document.querySelector('#register_firstname').value;
-  var lastname = document.querySelector('#register_lastname').value;
-  var passwd = document.querySelector('#register_password').value;
-  var cpasswd = document.querySelector('#register_cpassword').value;
+  const email = document.querySelector('#register_email').value;
+  const firstname = document.querySelector('#register_firstname').value;
+  const lastname = document.querySelector('#register_lastname').value;
+  const passwd = document.querySelector('#register_password').value;
+  const cpasswd = document.querySelector('#register_cpassword').value;
   
   if (validateRegistrationForm(email, firstname, lastname, passwd, cpasswd)) {
-    var payload = {
+    const payload = {
 		"email": email,
 		"password": passwd,
 		"firstname": firstname,
@@ -41,7 +41,7 @@ function createAccount() {
 		"type": "user",
 		"enabled": true
 	};
-	var config = {
+	const config = {
 		"url": "http://localhost:5000/user-management/api/v1/users",
 		"method": "POST",
 		"timeout": 60000,
@@ -58,17 +58,17 @@ function createAccount() {
 }
 
 function back() {
-  var navigator = document.querySelector('#navigator');
+  const navigator = document.querySelector('#navigator');
   navigator.popPage();
 }
 
 function home() {
-  var navigator = document.querySelector('#navigator');
+  const navigator = document.querySelector('#navigator');
   navigator.resetToPage('home.html', { pop: true });
 }
 
 function logout() {
-  var navigator = document.querySelector('#navigator');
+  const navigator = document.querySelector('#navigator');
   navigator.resetToPage('login.html', { pop: true });
 }
 
@@ -96,9 +96,9 @@ function validateRegistrationForm(email, firstname, lastname, passwd, cpasswd) {
   return false;
 }
 
-function callApi(config, successCallback, caller) {
+async function callApi(config, successCallback, caller) {
 	document.querySelector('#'+caller+'_pb').style.display = 'block';
-	axios(config)
+	await axios(config)
 		.then((response) => {
 			if (!response.data.error) {
 				successCallback(response.data);
