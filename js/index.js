@@ -1,15 +1,11 @@
-$(document).ready(function () {
-	console.log("Ready")
-});
-
 function login() {
-  var email = $('#index_email').val();
-  var password = $('#index_password').val();
+  var email = document.querySelector('#index_email').value;
+  var password = document.querySelector('#index_password').value;
 
   if (!email || !password) {
 	ons.notification.toast('Please enter username/password', { timeout: 2000 });
   } else {
-	  var settings = {
+	  var config = {
 		"url": "http://localhost:5000/user-management/api/v1/users",
 		"method": "GET",
 		"timeout": 60000,
@@ -18,7 +14,7 @@ function login() {
 		  "password": password,
 		}
 	  };
-	  callApi(settings, (data) => {
+	  callApi(config, (data) => {
 		home();
 	  }, 'login');
   }
@@ -30,11 +26,11 @@ function register() {
 }
 
 function createAccount() {
-  var email = $('#register_email').val();
-  var firstname = $('#register_firstname').val();
-  var lastname = $('#register_lastname').val();
-  var passwd = $('#register_password').val();
-  var cpasswd = $('#register_cpassword').val();
+  var email = document.querySelector('#register_email').value;
+  var firstname = document.querySelector('#register_firstname').value;
+  var lastname = document.querySelector('#register_lastname').value;
+  var passwd = document.querySelector('#register_password').value;
+  var cpasswd = document.querySelector('#register_cpassword').value;
   
   if (validateRegistrationForm(email, firstname, lastname, passwd, cpasswd)) {
     var payload = {
@@ -45,16 +41,17 @@ function createAccount() {
 		"type": "user",
 		"enabled": true
 	};
-	var settings = {
+	var config = {
 		"url": "http://localhost:5000/user-management/api/v1/users",
 		"method": "POST",
 		"timeout": 60000,
 		"headers": {
 			"Content-Type": "application/json"
 		},
-		"data": JSON.stringify(payload)
+		"data": payload
 	};
-	callApi(settings, (data) => {
+	callApi(config, (data) => {
+		showAlert("Account successfully created")
 		back();
 	}, 'register');
   }
@@ -80,38 +77,43 @@ function logout() {
 
 function validateRegistrationForm(email, firstname, lastname, passwd, cpasswd) {
   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-	  ons.notification.toast('Invalid Email Address', { timeout: 2000 });
+	  showAlert('Invalid Email Address');
   } else if (firstname.length == 0) {
-	  ons.notification.toast('First Name is blank', { timeout: 2000 });
+	  showAlert('First Name is blank');
   } else if (lastname.length == 0) {
-	  ons.notification.toast('Last Name is blank', { timeout: 2000 });
+	  showAlert('Last Name is blank');
   } else if (passwd.length == 0) {
-	  ons.notification.toast('Password is blank', { timeout: 2000 });
+	  showAlert('Password is blank');
   } else if (cpasswd.length == 0) {
-	  ons.notification.toast('Confirm Password is blank', { timeout: 2000 });
+	  showAlert('Confirm Password is blank');
   } else if (passwd.length < 8) {
-	  ons.notification.toast('Password must be at least 8 characters', { timeout: 2000 });
+	  showAlert('Password must be at least 8 characters');
   } else if (passwd != cpasswd) {
-	  ons.notification.toast('Passwords don\'t match', { timeout: 2000 });
+	  showAlert('Passwords don\'t match');
   } else {
 	  return true;
   }
   return false;
 }
 
-function callApi(settings, successCallback, caller) {
-	$('#'+caller+'_pb').show();
-	$.ajax(settings)
-		.done(function (data) {
-			if (!data.error) {
-				successCallback(data);
+function callApi(config, successCallback, caller) {
+	document.querySelector('#'+caller+'_pb').style.display = 'block';
+	axios(config)
+		.then((response) => {
+			if (!response.data.error) {
+				successCallback(response.data);
 			} else {
-				ons.notification.toast(data.error, { timeout: 2000 });
+				showAlert(response.data.error);
 			}
-			$('#'+caller+'_pb').hide();
+			document.querySelector('#'+caller+'_pb').style.display = 'none';
 		})
-		.fail(function (data) {
-			ons.notification.toast('Connection failed', { timeout: 2000 });
-			$('#'+caller+'_pb').hide();
+		.catch((error) => {
+			console.log(error);
+			showAlert('Connection failed');
+			document.querySelector('#'+caller+'_pb').style.display = 'none';
 		});
+}
+
+function showAlert(msg) {
+	ons.notification.toast(msg, { timeout: 2000 });
 }

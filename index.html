@@ -4,15 +4,15 @@
   <link rel="stylesheet" href="./css/onsenui.css">
   <link rel="stylesheet" href="./css/onsen-css-components.min.css">
   <script src="./js/onsenui.min.js"></script>
-  <script src="./js/jquery-3.5.0.min.js"></script>
+  <script src="./js/axios.min.js"></script>
   <script src="./js/index.js"></script>
   <script src="./js/home.js"></script>
 </head>
 <body>
-  <ons-navigator swipeable id="navigator" page="home.html">
+  <ons-navigator swipeable id="navigator" page="login.html">
 	<template id="login.html">
 	  <ons-page id="login">
-		<div id="login_pb" hidden><ons-progress-bar indeterminate></ons-progress-bar></div>
+		<div id="login_pb" style="display: none;"><ons-progress-bar indeterminate></ons-progress-bar></div>
 		<div style="text-align: center; margin-top: 200px">
 			<p>
 				<ons-input id="index_email" placeholder="Email" modifier="material"></ons-input>
