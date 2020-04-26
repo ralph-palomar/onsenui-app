@@ -1,9 +1,10 @@
+let accountInfo;
 function login() {
   const email = document.querySelector('#index_email').value;
   const password = document.querySelector('#index_password').value;
 
   if (!email || !password) {
-	ons.notification.toast('Please enter username/password', { timeout: 2000 });
+	showAlert("Please enter username/password");
   } else {
 	  const config = {
 		"url": "http://localhost:5000/user-management/api/v1/users",
@@ -15,6 +16,7 @@ function login() {
 		}
 	  };
 	  callApi(config, (data) => {
+		  accountInfo = data;
 		  home();
 	  }, 'login');
   }
@@ -64,7 +66,7 @@ function back() {
 
 function home() {
   const navigator = document.querySelector('#navigator');
-  navigator.resetToPage('home.html', { pop: true });
+  navigator.pushPage('home.html');
 }
 
 function logout() {
@@ -72,6 +74,13 @@ function logout() {
   navigator.resetToPage('login.html', { pop: true });
 }
 
+/////// EVENT LISTENERS ////////
+document.querySelector('ons-navigator').addEventListener('postpush', (event) => {
+	if(accountInfo === 'undefined' && event.enterPage.matches('ons-page#home')) {
+		const greeting = document.querySelector('#greeting');
+		ReactDOM.render(<Greeting firstname={accountInfo.firstname}/>, greeting);
+	}
+});
 
 /////// HELPER FUNCTIONS ///////
 
