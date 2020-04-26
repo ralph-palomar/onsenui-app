@@ -1,4 +1,5 @@
 let accountInfo;
+
 function login() {
   const email = document.querySelector('#index_email').value;
   const password = document.querySelector('#index_password').value;
@@ -75,12 +76,15 @@ function logout() {
 }
 
 /////// EVENT LISTENERS ////////
-document.querySelector('ons-navigator').addEventListener('postpush', (event) => {
-	if(accountInfo === 'undefined' && event.enterPage.matches('ons-page#home')) {
-		const greeting = document.querySelector('#greeting');
-		ReactDOM.render(<Greeting firstname={accountInfo.firstname}/>, greeting);
-	}
-});
+const nav = document.querySelector('ons-navigator');
+if (nav != null) {
+	nav.addEventListener('postpush', (event) => {
+		if(accountInfo != null && event.enterPage.matches('ons-page#home')) {
+			const greeting = document.querySelector('#greeting');
+			ReactDOM.render(<Greeting firstname={accountInfo.firstname}/>, greeting);
+		}
+	});
+}
 
 /////// HELPER FUNCTIONS ///////
 
@@ -106,7 +110,8 @@ function validateRegistrationForm(email, firstname, lastname, passwd, cpasswd) {
 }
 
 async function callApi(config, successCallback, caller) {
-	document.querySelector('#'+caller+'_pb').style.display = 'block';
+	const progress_bar = document.querySelector('#'+caller+'_pb');
+	if (progress_bar != null) progress_bar.style.display = 'block';
 	await axios(config)
 		.then((response) => {
 			if (!response.data.error) {
@@ -114,12 +119,12 @@ async function callApi(config, successCallback, caller) {
 			} else {
 				showAlert(response.data.error);
 			}
-			document.querySelector('#'+caller+'_pb').style.display = 'none';
+			if (progress_bar != null) progress_bar.style.display = 'none';
 		})
 		.catch((error) => {
 			console.log(error);
 			showAlert('Connection failed');
-			document.querySelector('#'+caller+'_pb').style.display = 'none';
+			if (progress_bar != null) progress_bar.style.display = 'none';
 		});
 }
 

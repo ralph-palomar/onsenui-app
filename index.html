@@ -5,57 +5,15 @@
   <link rel="stylesheet" href="./css/onsen-css-components.min.css">
   <script src="./js/onsenui.min.js"></script>
   <script src="./js/axios.min.js"></script>
-  <script type="text/babel" src="./js/index.js"></script>
-  <script type="text/babel" src="./js/home.js"></script>
   <script src="./js/react.production.min.js"></script>
   <script src="./js/react-dom.production.min.js"></script>
   <script src="./js/babel.min.js"></script>
+  <script type="text/babel" src="./js/index.js"></script>
+  <script type="text/babel" src="./js/home.js"></script>
+  <script type="text/babel" src="./js/users.js"></script>
 </head>
 <body>
   <ons-navigator swipeable id="navigator" page="home.html">
-	<template id="login.html">
-	  <ons-page id="login">
-		<div id="login_pb" style="display: none;"><ons-progress-bar indeterminate></ons-progress-bar></div>
-		<div style="text-align: center; margin-top: 200px">
-			<p>
-				<ons-input id="index_email" placeholder="Email" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-input id="index_password" placeholder="Password" type="password" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-button onclick="register()">Register</ons-button>
-				<ons-button onclick="login()">Sign in</ons-button>
-			</p>
-		</div>
-	  </ons-page>
-	</template>
-	<template id="register.html">
-	  <ons-page id="register">
-		<div id="register_pb" hidden><ons-progress-bar indeterminate></ons-progress-bar></div>
-		<div style="text-align: center; margin-top: 200px">
-			<p>
-				<ons-input id="register_email" placeholder="Email" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-input id="register_firstname" placeholder="First Name" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-input id="register_lastname" placeholder="Last Name" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-input id="register_password" placeholder="Password" type="password" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-input id="register_cpassword" placeholder="Confirm Password" type="password" modifier="material"></ons-input>
-			</p>
-			<p>
-				<ons-button onclick="back()">Back</ons-button>
-				<ons-button onclick="createAccount()">Submit</ons-button>
-			</p>
-		</div>
-	  </ons-page>
-	</template>
   </ons-navigator>
 </body>
 </html>
