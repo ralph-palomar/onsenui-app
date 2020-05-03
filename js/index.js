@@ -8,7 +8,7 @@ function login() {
 	showAlert("Please enter username/password");
   } else {
 	  const config = {
-		"url": "http://localhost:5000/user-management/api/v1/users",
+		"url": props.users_api_base_url + "/v1/users",
 		"method": "GET",
 		"timeout": 60000,
 		"headers": {
@@ -45,7 +45,7 @@ function createAccount() {
 		"enabled": true
 	};
 	const config = {
-		"url": "http://localhost:5000/user-management/api/v1/users",
+		"url": props.users_api_base_url + "/v1/users",
 		"method": "POST",
 		"timeout": 60000,
 		"headers": {
