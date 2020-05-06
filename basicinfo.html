@@ -1,0 +1,46 @@
+<ons-page id="basicinfo">
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Basic Information
+      </div>
+    </ons-toolbar>
+    <div id="basic_pb" style="display: none;"><ons-progress-bar indeterminate></ons-progress-bar></div>
+    <div style="margin-top: 20px; margin-left: 30px;">
+        <label>Last Name</label><br>
+        <ons-input id="basic_lastname" modifier="material"></ons-input><br>
+        <label>First Name</label><br>
+        <ons-input id="basic_firstname" modifier="material"></ons-input><br>
+        <label>Middle Name</label><br>
+        <ons-input id="basic_middlename" modifier="material"></ons-input><br>
+        <label>Date of Birth</label><br>
+        <div id="basic_dob"></div>
+        <br>
+        <label>Gender </label><br>
+        <ons-select id="basic_gender" modifier="material">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </ons-select>
+        <br>
+        <label>Address</label><br>
+        <textarea class="textarea" rows="3" cols="35"></textarea>
+        <br>
+        <label>Landline No.</label><br>
+        <ons-input type="number" id="basic_landlineno" modifier="material"></ons-input><br>
+        <label>Mobile No.</label><br>
+        <ons-input type="number" id="basic_mobileno" modifier="material"></ons-input><br>  
+        <label>Email Address</label><br>  
+        <ons-input type="email" id="basic_email" modifier="material"></ons-input><br>
+        <label>Support Person</label><br>  
+        <ons-input id="basic_supportperson" modifier="material"></ons-input><br>
+        <label>Relationship</label><br>  
+        <ons-input id="basic_relationship" modifier="material"></ons-input><br>
+        <label>Support Contact No.</label> <br> 
+        <ons-input id="basic_supportcontactno" modifier="material"></ons-input><br>
+        <br><br>
+    </div>
+  </ons-page>

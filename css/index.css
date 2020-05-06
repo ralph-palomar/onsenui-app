@@ -1,0 +1,9 @@
+label {
+    font-weight: bold;
+    font-size: 9px;
+    display: block;
+    width: 250px;
+    float: left;
+    padding-top: 8px;
+    text-transform: uppercase;
+}
